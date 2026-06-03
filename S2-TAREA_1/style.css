@@ -1,0 +1,221 @@
+/* ================================================
+   style.css – Sesión 2: Estilos del formulario
+   Técnicas: variables CSS, flexbox, tipografía,
+             colores, bordes y transiciones.
+   ================================================ */
+
+/* --- Variables de diseño --- */
+:root {
+  --color-bg:        #0f0f13;
+  --color-card:      #1a1a24;
+  --color-border:    #2e2e42;
+  --color-accent:    #7c6bff;
+  --color-accent-h:  #9d8fff;
+  --color-text:      #e8e6f0;
+  --color-muted:     #8a87a0;
+  --color-error:     #ff6b6b;
+  --color-success:   #6bffb8;
+  --radius:          12px;
+  --shadow:          0 8px 40px rgba(0, 0, 0, 0.5);
+  --font-display:    'Georgia', serif;
+  --font-body:       'Courier New', monospace;
+}
+
+/* --- Reset básico --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Body: flexbox para centrar la tarjeta --- */
+body {
+  min-height: 100vh;
+  display: flex;          /* Flexbox principal */
+  align-items: center;    /* Centrado vertical */
+  justify-content: center;/* Centrado horizontal */
+  background-color: var(--color-bg);
+  background-image:
+    radial-gradient(ellipse 60% 50% at 20% 30%, rgba(124, 107, 255, 0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 80% 70%, rgba(107, 255, 184, 0.06) 0%, transparent 70%);
+  font-family: var(--font-body);
+  color: var(--color-text);
+  padding: 24px;
+}
+
+/* --- Tarjeta del formulario --- */
+.card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 40px 36px 32px;
+  display: flex;          /* Flexbox interno */
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* --- Encabezado --- */
+.card__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.logo {
+  font-size: 2rem;
+  color: var(--color-accent);
+  line-height: 1;
+}
+
+.card__header h1 {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: normal;
+  letter-spacing: 0.02em;
+  color: var(--color-text);
+}
+
+.card__header p {
+  font-size: 0.82rem;
+  color: var(--color-muted);
+  letter-spacing: 0.04em;
+}
+
+/* --- Formulario: columna con flexbox --- */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* --- Grupos de campo --- */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* --- Inputs --- */
+input {
+  width: 100%;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input::placeholder {
+  color: var(--color-muted);
+  opacity: 0.6;
+}
+
+input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(124, 107, 255, 0.18);
+}
+
+/* Estado inválido (agregado por JS) */
+input.invalid {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.15);
+}
+
+/* Estado válido */
+input.valid {
+  border-color: var(--color-success);
+}
+
+/* --- Wrapper para input con botón de ojo --- */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper input {
+  padding-right: 44px;
+}
+
+.input-wrapper button {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+  padding: 0;
+  line-height: 1;
+}
+
+.input-wrapper button:hover {
+  opacity: 1;
+}
+
+/* --- Mensajes de error --- */
+.error-msg {
+  font-size: 0.75rem;
+  color: var(--color-error);
+  min-height: 1em;
+  letter-spacing: 0.02em;
+}
+
+/* --- Botón de envío --- */
+.btn-submit {
+  margin-top: 6px;
+  padding: 13px;
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.btn-submit:hover {
+  background: var(--color-accent-h);
+}
+
+.btn-submit:active {
+  transform: scale(0.98);
+}
+
+/* --- Pie de la tarjeta --- */
+.footer-text {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+.footer-text a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-text a:hover {
+  color: var(--color-accent-h);
+  text-decoration: underline;
+}
